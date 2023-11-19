@@ -16,10 +16,14 @@ public class ClienteForm extends javax.swing.JPanel {
     /**
      * Creates new form ClienteForm
      */
-
-    public ClienteForm() {
+    private MainPage main;
+    public ClienteForm(MainPage main) {
         initComponents();
+        this.main = main;
+        
     }
+    
+    
 
 
     /**
@@ -40,7 +44,10 @@ public class ClienteForm extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         ClientRG = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        ClientRG1 = new javax.swing.JTextField();
+        ClientEndereco = new javax.swing.JTextField();
+        Create = new javax.swing.JButton();
+        Load = new javax.swing.JButton();
+        Update1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(530, 645));
 
@@ -78,9 +85,30 @@ public class ClienteForm extends javax.swing.JPanel {
 
         jLabel5.setText("Endereco:");
 
-        ClientRG1.addActionListener(new java.awt.event.ActionListener() {
+        ClientEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClientRG1ActionPerformed(evt);
+                ClientEnderecoActionPerformed(evt);
+            }
+        });
+
+        Create.setText("Save New");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
+            }
+        });
+
+        Load.setText("Load");
+        Load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadActionPerformed(evt);
+            }
+        });
+
+        Update1.setText("Update");
+        Update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Update1ActionPerformed(evt);
             }
         });
 
@@ -93,8 +121,8 @@ public class ClienteForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 604, Short.MAX_VALUE)
-                        .addComponent(ClientRG1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ClientEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(163, 163, 163))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,7 +142,14 @@ public class ClienteForm extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ClientSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                     .addComponent(ClientCPF))))
-                        .addGap(280, 280, 280))))
+                        .addGap(280, 280, 280))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Load, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(Update1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(Create, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,8 +173,13 @@ public class ClienteForm extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(ClientRG1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(439, Short.MAX_VALUE))
+                    .addComponent(ClientEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Create, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Load, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Update1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,17 +199,51 @@ public class ClienteForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ClientRGActionPerformed
 
-    private void ClientRG1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientRG1ActionPerformed
+    private void ClientEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientEnderecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ClientRG1ActionPerformed
+    }//GEN-LAST:event_ClientEnderecoActionPerformed
+
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
+        String nome = ClientName.getText();        
+        String sobrenome = ClientSurname.getText();
+        String CPF = ClientCPF.getText();
+        String RG = ClientRG.getText();
+        String Endereco = ClientEndereco.getText();
+        this.main.createClient(nome, sobrenome, RG, CPF, Endereco);
+    }//GEN-LAST:event_CreateActionPerformed
+
+    private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
+       int i = main.ClienteList.getSelectedRow();
+       Cliente c = main.clientsArrayList.get(i);
+        ClientName.setText(c.getFirstName());
+        ClientSurname.setText(c.getLastName());
+        ClientCPF.setText(c.getCPF());
+        ClientEndereco.setText(c.getEndereco());
+        ClientRG.setText(c.getRG());
+    }//GEN-LAST:event_LoadActionPerformed
+
+    private void Update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update1ActionPerformed
+       int i = main.ClienteList.getSelectedRow();
+       Cliente c = main.clientsArrayList.get(i);
+       c.changeNome(ClientName.getText());        
+        c.changeSobreNome(ClientSurname.getText());
+        c.changeCPF(ClientCPF.getText());
+        c.changeRG(ClientRG.getText());
+       c.changeEndereco(ClientEndereco.getText());
+       main.clientsArrayList.set(i, c);
+       main.updateClientList();
+    }//GEN-LAST:event_Update1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ClientCPF;
+    private javax.swing.JTextField ClientEndereco;
     private javax.swing.JTextField ClientName;
     private javax.swing.JTextField ClientRG;
-    private javax.swing.JTextField ClientRG1;
     private javax.swing.JTextField ClientSurname;
+    private javax.swing.JButton Create;
+    private javax.swing.JButton Load;
+    private javax.swing.JButton Update1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

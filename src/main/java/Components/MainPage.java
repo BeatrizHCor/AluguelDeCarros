@@ -24,22 +24,14 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
-        clientsArrayList.add(c1);         
-         clientsArrayList.add(c2);
-         clientsArrayList.add(c3);
     }
-    private ArrayList <Cliente> clientsArrayList = new ArrayList<Cliente>();    
-    private ArrayList <VeiculoI> vehicleArrayList = new ArrayList<VeiculoI>();
-
-    
-    Cliente c1 = new Cliente("Beatriz", "Helena", "1234", "4321", "Sept");   
-    Cliente c2 = new Cliente("Gabriel", "Helena", "1234", "4321", "Sept");
-    Cliente c3 = new Cliente("Nath", "Helena", "1234", "4321", "Sept");
+    public ArrayList<Cliente> clientsArrayList = new ArrayList<Cliente>();
+    public ArrayList<VeiculoI> vehicleArrayList = new ArrayList<VeiculoI>();
 
     private String selected = "Select a Tab";
-    
-    private javax.swing.JTable ClienteList = new javax.swing.JTable();
-    private javax.swing.JTable VehicleList = new javax.swing.JTable();
+
+    public javax.swing.JTable ClienteList = new javax.swing.JTable();
+    public javax.swing.JTable VehicleList = new javax.swing.JTable();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,12 +147,11 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Forms)
-                        .addContainerGap())
+                    .addComponent(Forms)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Label, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,49 +176,57 @@ public class MainPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void updateClientList(){
-            Object Columns[] = {"Nome","CPF"};
-            Object Rows[][] = new Object[clientsArrayList.size()][2];
-            for(int i = 0; i < clientsArrayList.size(); i++){
-                Rows[i][0] = clientsArrayList.get(i).getNome();                
-                Rows[i][1] = clientsArrayList.get(i).getCPF();
-            }
-            DefaultTableModel model = new DefaultTableModel(Rows, Columns);
-            ClienteList.setModel(model);
-            jScrollPane2.setViewportView(ClienteList);
+    public void updateClientList() {
+        Object Columns[] = {"Nome", "CPF"};
+        Object Rows[][] = new Object[clientsArrayList.size()][2];
+        for (int i = 0; i < clientsArrayList.size(); i++) {
+            Rows[i][0] = clientsArrayList.get(i).getNome();
+            Rows[i][1] = clientsArrayList.get(i).getCPF();
+        }
+        DefaultTableModel model = new DefaultTableModel(Rows, Columns);
+        ClienteList.setModel(model);
+        jScrollPane2.setViewportView(ClienteList);
     }
-    public void updateVehicleList(){
-            Object Columns[] = {"Placa","Ano", "Marca", "Tipo", "Estado"};
-            Object Rows[][] = new Object[vehicleArrayList.size()][5];
-            for(int i = 0; i < vehicleArrayList.size(); i++){
-                Rows[i][0] = vehicleArrayList.get(i).getPlaca();                
-                Rows[i][1] = vehicleArrayList.get(i).getAno();
-                Rows[i][2] =  vehicleArrayList.get(i).getMarca();
-                Rows[i][3] = vehicleArrayList.get(i).getClass().getSimpleName();
-                Rows[i][4] = vehicleArrayList.get(i).getEstado();
-            }
-            DefaultTableModel model = new DefaultTableModel(Rows, Columns);
-            VehicleList.setModel(model);
-            jScrollPane2.setViewportView(VehicleList);
+
+    public void updateVehicleList() {
+        Object Columns[] = {"Placa", "Ano", "Marca", "Tipo", "Estado"};
+        Object Rows[][] = new Object[vehicleArrayList.size()][5];
+        for (int i = 0; i < vehicleArrayList.size(); i++) {
+            Rows[i][0] = vehicleArrayList.get(i).getPlaca();
+            Rows[i][1] = vehicleArrayList.get(i).getAno();
+            Rows[i][2] = vehicleArrayList.get(i).getMarca();
+            Rows[i][3] = vehicleArrayList.get(i).getClass().getSimpleName();
+            Rows[i][4] = vehicleArrayList.get(i).getEstado();
+        }
+        DefaultTableModel model = new DefaultTableModel(Rows, Columns);
+        VehicleList.setModel(model);
+        jScrollPane2.setViewportView(VehicleList);
     }
-    
-    public void DeleteClient(){
+
+    public void createClient(String Nome, String Sobrenome, String RG, String CPF, String Endereco) {
+        Cliente c = new Cliente(Nome, Sobrenome, CPF, RG, Endereco);
+        clientsArrayList.add(c);
+        updateClientList();
+    }
+
+    public void DeleteClient() {
         Integer i = ClienteList.getSelectedRow();
-        if(i != -1){
+        if (i != -1) {
             clientsArrayList.remove(clientsArrayList.get(i));
         }
         updateClientList();
     }
-     public void DeleteVehicle(){
+
+    public void DeleteVehicle() {
         Integer i = VehicleList.getSelectedRow();
-        if(i != -1){
+        if (i != -1) {
             vehicleArrayList.remove(vehicleArrayList.get(i));
         }
         updateClientList();
     }
-    
-    public void Delete(){
-        switch(selected){
+
+    public void Delete() {
+        switch (selected) {
             default:
                 return;
             case "Clients":
@@ -237,27 +236,27 @@ public class MainPage extends javax.swing.JFrame {
         }
     }
     private void ClientNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientNavActionPerformed
-            this.selected = "Clients";
-            Label.setText(selected);
-            updateClientList();
-            ClienteForm cp = new ClienteForm();
-            Forms.removeAll();
-            Forms.add(cp);
-           
-            
+        this.selected = "Clients";
+        Label.setText(selected);
+        updateClientList();
+        ClienteForm cp = new ClienteForm(this);
+        Forms.removeAll();
+        Forms.add(cp);
+
+
     }//GEN-LAST:event_ClientNavActionPerformed
 
     private void VahicleNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VahicleNavActionPerformed
-       this.selected = "Vehicles";
-       Label.setText(selected);
-       updateVehicleList();
-       Forms.removeAll();
+        this.selected = "Vehicles";
+        Label.setText(selected);
+        updateVehicleList();
+        Forms.removeAll();
     }//GEN-LAST:event_VahicleNavActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Delete();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -290,7 +289,7 @@ public class MainPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainPage().setVisible(true);
-                
+
             }
         });
     }
@@ -308,4 +307,3 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
-

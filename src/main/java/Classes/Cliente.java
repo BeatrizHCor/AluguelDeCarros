@@ -26,6 +26,13 @@ public class Cliente {
     public String getNome(){
         return this.nome + " " + this.sobreNome;
     };
+    public String getFirstName(){
+        return this.nome;
+    }
+    
+    public String getLastName(){
+        return this.sobreNome;
+    }
     
     public String getCPF(){
         return this.CPF;
