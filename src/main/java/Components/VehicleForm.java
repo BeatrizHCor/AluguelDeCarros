@@ -33,6 +33,7 @@ public class VehicleForm extends javax.swing.JPanel {
         }
         VMarcaCombo.setModel(modelM);
         VCategoriaCombo.setModel(modelCat);
+        main.updateVehicleList();
     }
     public Marca[] marcas = Marca.values();
     public Categoria[] categorias = Categoria.values();

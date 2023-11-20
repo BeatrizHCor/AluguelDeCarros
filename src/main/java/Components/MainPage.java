@@ -242,7 +242,8 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void createRent(Cliente c, VeiculoI v, Calendar hoje, int dias, double valor){
-        Locacao r = new Locacao(c,v,hoje,dias,valor);
+        v.locar(dias, hoje, c);
+        Locacao r = v.getLocacao();
         rentArrayList.add(r);
         updateRentList();
     }
@@ -263,7 +264,7 @@ public class MainPage extends javax.swing.JFrame {
         if (i != -1) {
             vehicleArrayList.remove(vehicleArrayList.get(i));
         }
-        updateClientList();
+        updateVehicleList();
     }
 
     public void Delete() {

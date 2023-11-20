@@ -47,6 +47,8 @@ public final class RentForm extends javax.swing.JPanel {
     }
    
     public void updateTables(){
+        this.FilteredvehicleArrayList = filterVehicles();
+        this.FilteredclientsArrayList = filterClients();
         Object ColumnsCliente[] = {"Nome"};
         Object RowsCliente[][] = new Object[this.FilteredclientsArrayList.size()][1];
         for (int i = 0; i < this.FilteredclientsArrayList.size(); i++){
@@ -291,6 +293,7 @@ public final class RentForm extends javax.swing.JPanel {
         main.rentArrayList.remove(rent);
         VeiculoI v = rent.getVeiculo();
         v.devolver();
+        main.updateRentList();
         updateTables();
     }//GEN-LAST:event_DevolverActionPerformed
 
