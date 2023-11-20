@@ -240,6 +240,12 @@ public class MainPage extends javax.swing.JFrame {
         vehicleArrayList.add(v);
         updateVehicleList();
     }
+    
+    public void createRent(Cliente c, VeiculoI v, Calendar hoje, int dias, double valor){
+        Locacao r = new Locacao(c,v,hoje,dias,valor);
+        rentArrayList.add(r);
+        updateRentList();
+    }
 
     public void DeleteClient() {
         Integer i = ClienteList.getSelectedRow();

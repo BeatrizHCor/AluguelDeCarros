@@ -5,8 +5,12 @@
 package Components;
 
 import Classes.Cliente;
+import Classes.Locacao;
 import Classes.VeiculoI;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author beatr
  */
-public class RentForm extends javax.swing.JPanel {
+public final class RentForm extends javax.swing.JPanel {
     
     public ArrayList<Cliente> FilteredclientsArrayList = new ArrayList<Cliente>();
     public ArrayList<VeiculoI> FilteredvehicleArrayList = new ArrayList<VeiculoI>();
@@ -86,12 +90,14 @@ public class RentForm extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         ClienteTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        LCPF = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         VeiculoTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        LMarca = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        LAno = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,7 +166,7 @@ public class RentForm extends javax.swing.JPanel {
 
         jLabel4.setText("CPF:");
 
-        jLabel6.setText("N/A");
+        LCPF.setText("N/A");
 
         jLabel7.setText("Veiculo:");
 
@@ -179,7 +185,11 @@ public class RentForm extends javax.swing.JPanel {
 
         jLabel5.setText("Marca:");
 
-        jLabel8.setText("N/A");
+        LMarca.setText("N/A");
+
+        jLabel6.setText("Ano:");
+
+        LAno.setText("N/A");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,43 +199,46 @@ public class RentForm extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(36, 36, 36)
-                                    .addComponent(Locar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(220, 220, 220)
-                                    .addComponent(jLabel7)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(LDias, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(179, 179, 179)))
-                        .addGap(36, 36, 36)
-                        .addComponent(Devolver, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(46, 46, 46)
-                                .addComponent(jLabel6)))
-                        .addGap(131, 131, 131)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LDias, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LCPF))))
+                        .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(LValor))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel8))))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(84, 84, 84))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(78, 78, 78)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(89, 89, 89)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LAno)
+                                    .addComponent(LMarca)
+                                    .addComponent(LValor))))
+                        .addContainerGap(141, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87)
+                                .addComponent(Locar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Devolver, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,11 +258,15 @@ public class RentForm extends javax.swing.JPanel {
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel8)))
+                                    .addComponent(LMarca)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                                .addComponent(LCPF)))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(LAno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LDias, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
@@ -269,11 +286,28 @@ public class RentForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void DevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DevolverActionPerformed
-        // TODO add your handling code here:
+        int rentIndex = main.rentList.getSelectedRow();
+        Locacao rent = main.rentArrayList.get(rentIndex);
+        main.rentArrayList.remove(rent);
+        VeiculoI v = rent.getVeiculo();
+        v.devolver();
+        updateTables();
     }//GEN-LAST:event_DevolverActionPerformed
 
     private void LocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocarActionPerformed
-        // TODO add your handling code here:
+        int clienteindex = FilteredClienteList.getSelectedRow();
+        int vehicleindex = FilteredVehicleList.getSelectedRow();
+        if(vehicleindex > -1 && clienteindex > -1){
+        Cliente c = FilteredclientsArrayList.get(clienteindex);
+        VeiculoI v = FilteredvehicleArrayList.get(vehicleindex);
+        Calendar hoje = Calendar.getInstance();
+        int dias = Integer.parseInt(LDias.getText());
+        double valor = v.getValorDiariaLocacao()*dias;
+        main.createRent(c, v, hoje, dias, valor);
+        main.updateRentList();
+        updateTables();
+        }
+        
     }//GEN-LAST:event_LocarActionPerformed
 
     private void LDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LDiasActionPerformed
@@ -281,7 +315,18 @@ public class RentForm extends javax.swing.JPanel {
     }//GEN-LAST:event_LDiasActionPerformed
 
     private void CarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarActionPerformed
-        
+
+        int rentindex = main.rentList.getSelectedRow();
+        Locacao rent = main.rentArrayList.get(rentindex);
+        Cliente c = rent.getCliente();
+        VeiculoI v = rent.getVeiculo();
+        LCPF.setText(c.getCPF());
+        LAno.setText(String.valueOf(v.getAno()));
+        LDias.setText(String.valueOf(rent.getDias()));
+        LValor.setText(String.valueOf(rent.getValor()));
+        LMarca.setText(v.getMarca().getAtual());
+       
+        updateTables();
     }//GEN-LAST:event_CarregarActionPerformed
 
 
@@ -289,7 +334,10 @@ public class RentForm extends javax.swing.JPanel {
     private javax.swing.JButton Carregar;
     private javax.swing.JTable ClienteTable;
     private javax.swing.JButton Devolver;
+    private javax.swing.JLabel LAno;
+    private javax.swing.JLabel LCPF;
     private javax.swing.JTextField LDias;
+    private javax.swing.JLabel LMarca;
     private javax.swing.JLabel LValor;
     private javax.swing.JButton Locar;
     private javax.swing.JTable VeiculoTable;
@@ -302,7 +350,6 @@ public class RentForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
