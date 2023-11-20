@@ -9,7 +9,7 @@ package Classes;
  * @author beatr
  */
 public enum Estado {
-    d("Disposnivél"), v("Vendido"), l("Locado"), n("Novo");
+    d("Disponivel"), v("Vendido"), l("Locado"), n("Novo");
     private final String atual;
     
     Estado(String atual){
