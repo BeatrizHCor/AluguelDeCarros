@@ -132,7 +132,7 @@ public class VehicleForm extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setText("Locacao:");
+        jLabel8.setText("Ultima Locacao:");
 
         jLabel10.setText("Valor Locacao:");
 
@@ -218,7 +218,7 @@ public class VehicleForm extends javax.swing.JPanel {
                                         .addGap(36, 36, 36)
                                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                         .addComponent(VLocaCliente)
                                         .addGap(42, 42, 42)))
                                 .addGap(40, 40, 40)))

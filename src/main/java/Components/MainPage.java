@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.OverlayLayout;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,13 +38,17 @@ public class MainPage extends javax.swing.JFrame {
     }
     public ArrayList<Cliente> clientsArrayList = new ArrayList<Cliente>();
     public ArrayList<VeiculoI> vehicleArrayList = new ArrayList<VeiculoI>();
-    public ArrayList<Locacao> rentArrayList = new ArrayList<Locacao>();
+    public ArrayList<Locacao> rentArrayList = new ArrayList<Locacao>();    
+    public ArrayList<VeiculoI> salesArrayList = new ArrayList<VeiculoI>();
+
     
     private String selected = "Select a Tab";
 
     public javax.swing.JTable ClienteList = new javax.swing.JTable();
     public javax.swing.JTable VehicleList = new javax.swing.JTable();   
-    public javax.swing.JTable rentList = new javax.swing.JTable();
+    public javax.swing.JTable rentList = new javax.swing.JTable();    
+    public javax.swing.JTable salesList = new javax.swing.JTable();
+
 
     
     
@@ -91,6 +97,11 @@ public class MainPage extends javax.swing.JFrame {
 
         SellNav.setIcon(new javax.swing.ImageIcon("C:\\Users\\beatr\\Documents\\NetBeansProjects\\AluguelDeCarros\\src\\main\\java\\icons\\loan.png")); // NOI18N
         SellNav.setPreferredSize(new java.awt.Dimension(72, 72));
+        SellNav.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SellNavActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,6 +216,22 @@ public class MainPage extends javax.swing.JFrame {
         VehicleList.setModel(model);
         jScrollPane2.setViewportView(VehicleList);
     }
+    public void updateSalesList() {
+       Object Columns[] = {"Placa", "Ano", "Marca", "Tipo", "Valor"};
+       Stream<VeiculoI> fv = vehicleArrayList.stream().filter(v -> "Vendido".equals(v.getEstado().getAtual()) );
+       salesArrayList = new ArrayList(fv.collect(Collectors.toList()));
+       Object Rows[][] = new Object[salesArrayList.size()][5];
+        for (int i = 0; i < salesArrayList.size(); i++) {
+            Rows[i][0] = salesArrayList.get(i).getPlaca();
+            Rows[i][1] = salesArrayList.get(i).getAno();
+            Rows[i][2] = salesArrayList.get(i).getMarca();
+            Rows[i][3] = salesArrayList.get(i).getClass().getSimpleName();
+            Rows[i][4] = salesArrayList.get(i).getValorParaVenda();
+        }
+        DefaultTableModel model = new DefaultTableModel(Rows, Columns);
+       salesList.setModel(model);
+       jScrollPane2.setViewportView(salesList);
+    }
     public void updateRentList (){
         Object Columns[] = {"Cliente", "Placa", "Valor"};
         Object Rows[][] = new Object[rentArrayList.size()][4];
@@ -273,8 +300,10 @@ public class MainPage extends javax.swing.JFrame {
                 return;
             case "Clients":
                 DeleteClient();
+                return;
             case "Vehicles":
                 DeleteVehicle();
+                return;
         }
     }
     private void ClientNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientNavActionPerformed
@@ -303,6 +332,15 @@ public class MainPage extends javax.swing.JFrame {
         Forms.removeAll();
         Forms.add(rf);
     }//GEN-LAST:event_RentNavActionPerformed
+
+    private void SellNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellNavActionPerformed
+        this.selected = "Sales";
+        Label.setText(selected);
+        SellForm sf = new SellForm(this);
+        Forms.removeAll();
+        Forms.add(sf);
+        updateSalesList();
+    }//GEN-LAST:event_SellNavActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,4 +390,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

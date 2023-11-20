@@ -1,6 +1,8 @@
+Components\MainPage$5.class
 Classes\Marca.class
 Components\MainPage.class
 Components\VehicleForm$10.class
+Components\SellForm.class
 Components\VehicleForm$3.class
 Components\ClienteForm$1.class
 Classes\ModeloAutomovel.class
@@ -34,6 +36,7 @@ Components\ClienteForm$9.class
 Components\VehicleForm$7.class
 Classes\VeiculoI.class
 Components\ClienteForm$2.class
+Components\SellForm$1.class
 Components\MainPage$4.class
 Components\MainPage$1.class
 Components\ClienteForm$8.class
